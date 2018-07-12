@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Sitecycle</title>
+        <style type="text/css">
+           body {
+             overflow:hidden;
+           }
+        </style>
+        <script type="text/javascript">
+            var urls = [
+                {"url":"https://onlineclock.net/", "interval":10000},
+                {"url":"http://www.isstracker.com/", "interval":2000},
+                {"url":"https://currentmillis.com/", "interval":4000},
+                {"url":"http://www.clocktab.com/", "interval":4000}
+            ];
+
+            function showUrl(currentIndex) {
+                var frame = document.getElementById("frame");
+
+                frame.onload = function() {
+                        var next = ++currentIndex % urls.length;
+                        setTimeout(function() {
+                            showUrl(next);
+                        }, urls[currentIndex-1].interval);
+                    }
+                frame.src = urls[currentIndex].url;
+            }
+        </script>
+    </head>
+    <body onload="showUrl(0)" class="app-chrome" bgcolor="#000000">
+        <iframe id="frame" src="about:blank" frameborder="0" style="overflow:hidden; display:block; position: absolute; height: 100%; width: 100%"></iframe>
+    </body>
+</html>
